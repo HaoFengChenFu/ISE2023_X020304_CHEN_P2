@@ -1222,7 +1222,7 @@
 
 // <e> SPI1 (Serial Peripheral Interface 1) [Driver_SPI1]
 // <i> Configuration settings for Driver_SPI1 in component ::CMSIS Driver:SPI
-#define RTE_SPI1                        0
+#define RTE_SPI1                        1
 
 //   <o> SPI1_MISO Pin <0=>Not Used <1=>PA6 <2=>PB4
 #define RTE_SPI1_MISO_PORT_ID           0
@@ -2213,10 +2213,10 @@
 
 // <e> ETH (Ethernet Interface) [Driver_ETH_MAC0]
 // <i> Configuration settings for Driver_ETH_MAC0 in component ::CMSIS Driver:Ethernet MAC
-#define RTE_ETH                         1
+#define RTE_ETH                         0
 
 //   <e> MII (Media Independent Interface)
-#define RTE_ETH_MII                     0
+#define RTE_ETH_MII                     1
 
 //     <o> ETH_MII_TX_CLK Pin <0=>PC3
 #define RTE_ETH_MII_TX_CLK_PORT_ID      0
@@ -2369,7 +2369,7 @@
 //   </e>
 
 //   <e> RMII (Reduced Media Independent Interface)
-#define RTE_ETH_RMII                    1
+#define RTE_ETH_RMII                    0
 
 //     <o> ETH_RMII_TXD0 Pin <0=>PB12 <1=>PG13
 #define RTE_ETH_RMII_TXD0_PORT_ID       0
@@ -2383,7 +2383,7 @@
 #error "Invalid ETH_RMII_TXD0 Pin Configuration!"
 #endif
 //     <o> ETH_RMII_TXD1 Pin <0=>PB13 <1=>PG14
-#define RTE_ETH_RMII_TXD1_PORT_ID       1
+#define RTE_ETH_RMII_TXD1_PORT_ID       0
 #if    (RTE_ETH_RMII_TXD1_PORT_ID == 0)
 #define RTE_ETH_RMII_TXD1_PORT          GPIOB
 #define RTE_ETH_RMII_TXD1_PIN           13
