@@ -16,14 +16,16 @@ char date[30];
 ***********************************************************/
 void RTC_Init(void)
 {
+	__HAL_RCC_RTC_CONFIG(RCC_RTCCLKSOURCE_LSE);
 	__HAL_RCC_RTC_ENABLE();
-	__HAL_RCC_PWR_CLK_ENABLE();		// Para poder leer los registros
 	HAL_PWR_EnableBkUpAccess();
+	__HAL_RCC_PWR_CLK_ENABLE();		// Para poder leer los registros
+
 	hrtc.Instance = RTC;
-	hrtc.Init.HourFormat = RTC_HOURFORMAT_24;
-	hrtc.Init.AsynchPrediv = 0x7f;
-	hrtc.Init.SynchPrediv = 0x17ff;
-	hrtc.Init.OutPut = RTC_OUTPUT_ALARMA;
+	hrtc.Init.HourFormat = RTC_HOURFORMAT_24;					// 32,768kHz/((127+1)(255+1)) = 1 Hz
+	hrtc.Init.AsynchPrediv = 255;			//127;		//0x7f;
+	hrtc.Init.SynchPrediv = 127;			//255;		//0x17ff;
+	hrtc.Init.OutPut = RTC_OUTPUT_DISABLE;
 	hrtc.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
 	hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
 	
@@ -58,7 +60,7 @@ void Get_Time_RTC_Binary(void)
 /***********************************************************
 						Ajusta un nuevo tiempo
 ***********************************************************/
-void Set_Time_RTC(uint16_t hour, uint16_t minute, uint16_t second)
+void Set_Time_RTC(uint8_t hour, uint8_t minute, uint8_t second)
 {
 	sTime.Hours = hour;
 	sTime.Minutes = minute;
@@ -79,7 +81,7 @@ void Get_Date_RTC()
 /***********************************************************
 						Ajusta una nueva fecha
 ***********************************************************/
-void Set_RTC_Date(uint16_t year, uint16_t month,uint16_t week, uint16_t date)
+void Set_RTC_Date(uint8_t year, uint8_t month, uint8_t week, uint8_t date)
 {
 	sDate.Year = year;
 	sDate.Month = month;
@@ -90,7 +92,7 @@ void Set_RTC_Date(uint16_t year, uint16_t month,uint16_t week, uint16_t date)
 /***********************************************************
 						Coloca una alarma
 ***********************************************************/
-void Set_Alarm(uint16_t hour, uint16_t minute, uint16_t second)
+void Set_Alarm(uint8_t hour, uint8_t minute, uint8_t second)
 {
 
 	sAlarm.AlarmTime.Hours = hour;
@@ -125,11 +127,14 @@ void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc)
 ***********************************************************/
 void Display_Date_Time(void)
 {
-	Get_Time_RTC_Binary();
-	sprintf(time, "Time: %.2d:%.2d:%.2d", sTime.Hours, sTime.Minutes, sTime.Seconds);
+	RTC_TimeTypeDef gTime;
+	RTC_DateTypeDef gDate;
+	HAL_RTC_GetTime(&hrtc, &gTime, RTC_FORMAT_BIN);
+	HAL_RTC_GetDate(&hrtc, &gDate, RTC_FORMAT_BIN);
+	sprintf(time, "Time: %.2d:%.2d:%.2d", gTime.Hours, gTime.Minutes, gTime.Seconds);
 	
-	Get_Date_RTC();
-	sprintf(date, "Date: %.2d-%.2d-%.2d", sDate.Date, sDate.Month, sDate.Year);
+	HAL_RTC_GetDate(&hrtc, &gDate, RTC_FORMAT_BIN);
+	sprintf(date, "Date: %.2d-%.2d-%.4d", gDate.Date, gDate.Month, gDate.Year);
 
 	LCD_symbolToLocalBuffer_L1(time, strlen(time));
 	LCD_symbolToLocalBuffer_L2(date, strlen(date));

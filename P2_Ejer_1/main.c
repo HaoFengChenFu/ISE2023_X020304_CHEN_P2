@@ -124,11 +124,12 @@ int main(void)
 	LED_Init();
 
 	RTC_Init();
-	//Set_Alarm(0, 0, 5);
+
 	Display_Date_Time();
 
-		HAL_Delay(3000);
-		Display_Date_Time();
+	HAL_Delay(3000);			// Para ver si cambia el tiempo
+	Display_Date_Time();
+		
 #ifdef RTE_CMSIS_RTOS2
   /* Initialize CMSIS-RTOS2 */
   osKernelInitialize ();
@@ -144,7 +145,7 @@ int main(void)
   while (1)
   {
 		HAL_Delay(3000);
-		Display_Date_Time();
+		printf(time, "Time: %.2d:%.2d:%.2d", sTime.Hours, sTime.Minutes, sTime.Seconds);
   }
 }
 
@@ -172,6 +173,13 @@ static void SystemClock_Config(void)
 {
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
   RCC_OscInitTypeDef RCC_OscInitStruct;
+	
+	RCC_OscInitStruct.LSEState = RCC_LSE_ON;
+	
+	RCC_PeriphCLKInitTypeDef PeriphClkInitStruct;//
+	PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_RTC;//
+  PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;//
+  HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);//
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
@@ -190,13 +198,6 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLN = 168;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
-	
-	// Esto es para que seleccione el reloj HSE  *******************************************************
-	RCC_PeriphCLKInitTypeDef PeriphClkInitStruct;//
-  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_RTC;//
-  PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_HSE_DIV10;// CAMBIAR AL LSE
-  HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);//
-	
   if(HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     /* Initialization Error */

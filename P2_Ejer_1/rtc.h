@@ -10,10 +10,10 @@
 
 void RTC_Init(void);
 void Get_Time_RTC_Binary(void);
-void Set_Time_RTC(uint16_t hour, uint16_t minute, uint16_t second);
+void Set_Time_RTC(uint8_t hour, uint8_t minute, uint8_t second);
 void Get_Date_RTC(void);
-void Set_RTC_Date(uint16_t year, uint16_t month,uint16_t week, uint16_t date);
-void Set_Alarm(uint16_t hour, uint16_t minute, uint16_t second);
+void Set_RTC_Date(uint8_t year, uint8_t month, uint8_t week, uint8_t date);
+void Set_Alarm(uint8_t hour, uint8_t minute, uint8_t second);
 
 void Display_Date_Time(void);
 #endif
