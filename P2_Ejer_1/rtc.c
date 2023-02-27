@@ -16,15 +16,15 @@ char date[30];
 ***********************************************************/
 void RTC_Init(void)
 {
-	__HAL_RCC_RTC_CONFIG(RCC_RTCCLKSOURCE_LSE);
+	__HAL_RCC_RTC_CONFIG(RCC_RTCCLKSOURCE_HSE_DIV10);
 	__HAL_RCC_RTC_ENABLE();
 	HAL_PWR_EnableBkUpAccess();
 	__HAL_RCC_PWR_CLK_ENABLE();		// Para poder leer los registros
 
 	hrtc.Instance = RTC;
 	hrtc.Init.HourFormat = RTC_HOURFORMAT_24;					// 32,768kHz/((127+1)(255+1)) = 1 Hz
-	hrtc.Init.AsynchPrediv = 255;			//127;		//0x7f;
-	hrtc.Init.SynchPrediv = 127;			//255;		//0x17ff;
+	hrtc.Init.AsynchPrediv = 127;			//127;		//0x7f;
+	hrtc.Init.SynchPrediv = 6249;			//255;		//0x17ff;
 	hrtc.Init.OutPut = RTC_OUTPUT_DISABLE;
 	hrtc.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
 	hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
@@ -107,6 +107,14 @@ void Set_Alarm(uint8_t hour, uint8_t minute, uint8_t second)
 	HAL_RTC_AlarmIRQHandler(&hrtc);
 	HAL_RTC_SetAlarm_IT(&hrtc, &sAlarm, RTC_FORMAT_BIN);
 
+}
+
+/***********************************************************
+						Handler de las alarmas
+***********************************************************/
+void RTC_Alarm_IRQHandler(void)
+{
+  HAL_RTC_AlarmIRQHandler(&hrtc);
 }
 
 /***********************************************************
