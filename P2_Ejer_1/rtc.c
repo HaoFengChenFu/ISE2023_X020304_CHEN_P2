@@ -32,7 +32,7 @@ void RTC_Init(void)
 	// Ajustamos el tiempo
 	sTime.Hours = 12;
 	sTime.Minutes = 24;
-	sTime.Seconds = 15;
+	sTime.Seconds = 56;
 	sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
 	sTime.StoreOperation = RTC_STOREOPERATION_RESET;
 	HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
@@ -99,12 +99,16 @@ void Set_Alarm(uint8_t hour, uint8_t minute, uint8_t second)
 	sAlarm.AlarmTime.Minutes = minute;
 	sAlarm.AlarmTime.Seconds = second;
 	
-	sAlarm.AlarmMask = RTC_ALARMMASK_ALL;
+	sAlarm.AlarmDateWeekDaySel = RTC_ALARMDATEWEEKDAYSEL_DATE;
+	sAlarm.AlarmDateWeekDay = 21;
+	
+	sAlarm.AlarmMask = RTC_ALARMMASK_MINUTES;
 	sAlarm.AlarmTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE; 
 	sAlarm.AlarmTime.StoreOperation = RTC_STOREOPERATION_RESET;
 	sAlarm.Alarm = RTC_ALARM_A;
 	
 	HAL_RTC_AlarmIRQHandler(&hrtc);
+	HAL_NVIC_SetPriority(RTC_Alarm_IRQn, 0, 0);
 	HAL_RTC_SetAlarm_IT(&hrtc, &sAlarm, RTC_FORMAT_BIN);
 
 }
@@ -125,7 +129,7 @@ void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc)
 	if(hrtc->Instance == RTC){
 		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0); // turn on the LED 
 		Get_Time_RTC_Binary();
-		sTime.Seconds = sTime.Seconds + 5;
+		sTime.Minutes = sTime.Minutes + 1;
 		HAL_RTC_SetAlarm_IT(hrtc, &sAlarm, RTC_FORMAT_BIN);
 	}
 }

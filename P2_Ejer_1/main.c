@@ -35,6 +35,9 @@ extern RTC_DateTypeDef sDate;
 extern char time[30];
 extern char date[30];
 
+void app_main(void *arg); 
+
+
 #ifdef _RTE_
 #include "RTE_Components.h"             // Component selection
 #endif
@@ -117,18 +120,6 @@ int main(void)
 
   /* Add your application code here
      */
-	LCD_reset();
-	LCD_Init();
-	LCD_clear();
-	
-	LED_Init();
-
-	RTC_Init();
-	Set_Alarm(0,1,0);
-	Display_Date_Time();
-	
-	HAL_Delay(4000);			// Para ver si cambia el tiempo
-	Display_Date_Time();
 		
 #ifdef RTE_CMSIS_RTOS2
   /* Initialize CMSIS-RTOS2 */
@@ -136,6 +127,9 @@ int main(void)
 
   /* Create thread functions that start executing, 
   Example: osThreadNew(app_main, NULL, NULL); */
+		osThreadNew(app_main, NULL, NULL);
+
+
 
   /* Start thread execution */
   osKernelStart();
@@ -144,6 +138,23 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
+  }
+}
+// Aplicación principal		********************************************************
+void app_main (void *arg) {
+	
+	LCD_reset();
+	LCD_Init();
+	LCD_clear();
+	
+	LED_Init();
+
+	RTC_Init();
+	Set_Alarm(12,25,0);		// Elegir la hora
+
+  while(1) {
+		Display_Date_Time();
+		osDelay(1000);	
   }
 }
 
