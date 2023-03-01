@@ -144,7 +144,7 @@ void Display_Date_Time(void)
 	HAL_RTC_GetTime(&hrtc, &gTime, RTC_FORMAT_BIN);
 	HAL_RTC_GetDate(&hrtc, &gDate, RTC_FORMAT_BIN);
 	sprintf(time, "Time: %.2d:%.2d:%.2d", gTime.Hours, gTime.Minutes, gTime.Seconds);
-	
+	printf(time, "Time: %.2d:%.2d:%.2d", gTime.Hours, gTime.Minutes, gTime.Seconds);
 	HAL_RTC_GetDate(&hrtc, &gDate, RTC_FORMAT_BIN);
 	sprintf(date, "Date: %.2d-%.2d-%.4d", gDate.Date, gDate.Month, gDate.Year);
 
