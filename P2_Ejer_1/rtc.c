@@ -23,9 +23,9 @@ void RTC_Init(void)
 	__HAL_RCC_PWR_CLK_ENABLE();		// Para poder leer los registros
 
 	hrtc.Instance = RTC;
-	hrtc.Init.HourFormat = RTC_HOURFORMAT_24;					// 32,768kHz/((127+1)(255+1)) = 1 Hz			// Para LSE 127 y 255, para HSE de 8 MHz es 127 y 6249
-	hrtc.Init.AsynchPrediv = 127;			//127;		//0x7f;
-	hrtc.Init.SynchPrediv = 255;			//255;		//0x17ff;
+	hrtc.Init.HourFormat = RTC_HOURFORMAT_24;					// 32,768kHz/((127+1)(255+1)) = 1 Hz			// Para LSE 127 y 255, para HSE de 8 MHz (Que por el div 10 se queda en 800kHz) es 127 y 6249
+	hrtc.Init.AsynchPrediv = 127;
+	hrtc.Init.SynchPrediv = 255;
 	hrtc.Init.OutPut = RTC_OUTPUT_DISABLE;
 	hrtc.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
 	hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
@@ -131,7 +131,7 @@ void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc)
 { 
 	if(hrtc->Instance == RTC){
 		osThreadFlagsSet(tid_Thread_Parpadeo, 1); // turn on the LED 
-		Get_Time_RTC_Binary();
+		Get_Time_RTC_Binary();										// Si se quiere cambiar la fecha hay que hacer Get_Time_RTC_Binary(); y Get_Date_RTC();
 		sTime.Minutes = sTime.Minutes + 1;
 		HAL_RTC_SetAlarm_IT(hrtc, &sAlarm, RTC_FORMAT_BIN);
 	}

@@ -35,3 +35,4 @@
 .\objects\parpadeo.o: C:\Users\fengc\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.17.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h
 .\objects\parpadeo.o: C:\Users\fengc\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.17.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h
 .\objects\parpadeo.o: Parpadeo.h
+.\objects\parpadeo.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
