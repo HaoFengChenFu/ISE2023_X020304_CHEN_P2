@@ -154,7 +154,6 @@ void app_main (void *arg) {
 
   while(1) {
 		Display_Date_Time();
-
 		osDelay(1000);	
   }
 }

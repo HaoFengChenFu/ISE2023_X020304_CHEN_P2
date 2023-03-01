@@ -22,9 +22,9 @@
 /* Keil.ARM Compiler::Compiler:Event Recorder:DAP:1.4.0 */
 #define RTE_Compiler_EventRecorder
           #define RTE_Compiler_EventRecorder_DAP
-/* Keil.ARM Compiler::Compiler:I/O:STDOUT:ITM:1.2.0 */
+/* Keil.ARM Compiler::Compiler:I/O:STDOUT:Breakpoint:1.2.0 */
 #define RTE_Compiler_IO_STDOUT          /* Compiler I/O: STDOUT */
-          #define RTE_Compiler_IO_STDOUT_ITM      /* Compiler I/O: STDOUT ITM */
+          #define RTE_Compiler_IO_STDOUT_BKPT     /* Compiler I/O: STDOUT Breakpoint */
 /* Keil::CMSIS Driver:SPI:2.18 */
 #define RTE_Drivers_SPI1                /* Driver SPI1 */
         #define RTE_Drivers_SPI2                /* Driver SPI2 */

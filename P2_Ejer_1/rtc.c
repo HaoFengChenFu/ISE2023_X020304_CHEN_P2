@@ -31,6 +31,7 @@ void RTC_Init(void)
 	
 	// Ajustamos el tiempo
 	sTime.Hours = 12;
+	sTime.TimeFormat=RTC_HOURFORMAT_24;
 	sTime.Minutes = 24;
 	sTime.Seconds = 56;
 	sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
@@ -141,12 +142,12 @@ void Display_Date_Time(void)
 {
 	RTC_TimeTypeDef gTime;
 	RTC_DateTypeDef gDate;
-	HAL_RTC_GetTime(&hrtc, &gTime, RTC_FORMAT_BIN);
+	HAL_RTC_GetTime(&hrtc, &gTime, RTC_FORMAT_BIN);//Primero el time y luego el date siempre
 	HAL_RTC_GetDate(&hrtc, &gDate, RTC_FORMAT_BIN);
 	sprintf(time, "Time: %.2d:%.2d:%.2d", gTime.Hours, gTime.Minutes, gTime.Seconds);
-	printf(time, "Time: %.2d:%.2d:%.2d", gTime.Hours, gTime.Minutes, gTime.Seconds);
+	
 	HAL_RTC_GetDate(&hrtc, &gDate, RTC_FORMAT_BIN);
-	sprintf(date, "Date: %.2d-%.2d-%.4d", gDate.Date, gDate.Month, gDate.Year);
+	sprintf(date, "Date: %.2d-%.2d-%.4d", gDate.Date, gDate.Month, gDate.Year+2000);
 
 	LCD_symbolToLocalBuffer_L1(time, strlen(time));
 	LCD_symbolToLocalBuffer_L2(date, strlen(date));
