@@ -7,6 +7,7 @@
 
 #include "stdio.h"
 #include "string.h"
+#include "Parpadeo.h"
 
 void RTC_Init(void);
 void Get_Time_RTC_Binary(void);

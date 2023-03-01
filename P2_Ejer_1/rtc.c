@@ -1,5 +1,6 @@
 #include "rtc.h"
 #include "lcd.h"
+#include "cmsis_os2.h"
 /*********************************************************************
 		Inspiración: https://controllerstech.com/internal-rtc-in-stm32/
 *********************************************************************/
@@ -125,10 +126,11 @@ void RTC_Alarm_IRQHandler(void)
 /***********************************************************
 						Callback de la alarma
 ***********************************************************/
+extern osThreadId_t tid_Thread_Parpadeo;
 void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc) 
 { 
 	if(hrtc->Instance == RTC){
-		HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0); // turn on the LED 
+		osThreadFlagsSet(tid_Thread_Parpadeo, 1); // turn on the LED 
 		Get_Time_RTC_Binary();
 		sTime.Minutes = sTime.Minutes + 1;
 		HAL_RTC_SetAlarm_IT(hrtc, &sAlarm, RTC_FORMAT_BIN);

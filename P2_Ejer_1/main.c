@@ -26,6 +26,8 @@
 #include "leds.h"
 #include "lcd.h"
 #include "rtc.h"
+#include "Parpadeo.h"
+
 
 extern RTC_HandleTypeDef hrtc;
 extern RTC_AlarmTypeDef sAlarm;			// La s es de set, se usaría g si fuese get
@@ -128,7 +130,7 @@ int main(void)
   /* Create thread functions that start executing, 
   Example: osThreadNew(app_main, NULL, NULL); */
 		osThreadNew(app_main, NULL, NULL);
-
+		Init_Parpadeo();
 
 
   /* Start thread execution */
