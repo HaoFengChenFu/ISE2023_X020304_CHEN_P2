@@ -13,10 +13,10 @@ t  <th width=60%>Valores</th></tr>
 # Here begin data setting which is formatted in HTTP_CGI.C module
 t <tr><td><img src=pabb.gif>Tiempo</td>
 t <td align="center"><input type="text" readonly style="background-color: transparent; border: 0px"
-c f 1 size="10" id="rtc_time_value" value="%s"></td></tr>
+c h 1 size="10" id="rtc_time_value" value="%s"></td></tr>
 t <tr><td><img src=pabb.gif>Fecha</TD>
 t <td align="center"><input type="text" readonly style="background-color: transparent; border: 0px"
-c f 2 size="10" id="rtc_date_value" value="%s"></td></tr>
+c h 2 size="10" id="rtc_date_value" value="%s"></td></tr>
 t </font></table>
 # Here begin button definitions
 #t <p align=center>

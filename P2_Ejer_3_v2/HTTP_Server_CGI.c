@@ -17,7 +17,8 @@
 #include "lcd.h"				// MODIFICADO
 #include "adc.h"				// MODIFICADO
 ADC_HandleTypeDef adchandle; //handler definition
-
+extern char time[30];
+extern char date[30];
 
 
 
@@ -409,11 +410,11 @@ uint32_t netCGI_Script (const char *env, char *buf, uint32_t buflen, uint32_t *p
 		case 'h':
 			switch (env[2]) {
 				case '1':		// Tiempo
-					len = (uint32_t)sprintf (buf, &env[4], "aas");
+					len = (uint32_t)sprintf (buf, &env[4], time);
 					break;
 				
 				case '2':		// Fecha
-				
+					len = (uint32_t)sprintf (buf, &env[4], date);
 					break;
 			}
 			break;
