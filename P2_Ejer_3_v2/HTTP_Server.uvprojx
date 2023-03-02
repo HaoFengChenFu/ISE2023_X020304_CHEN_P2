@@ -563,6 +563,11 @@
               <FileType>9</FileType>
               <FilePath>.\Web\rtc.cgi</FilePath>
             </File>
+            <File>
+              <FileName>rtc.cgx</FileName>
+              <FileType>9</FileType>
+              <FilePath>.\Web\rtc.cgx</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1148,6 +1153,11 @@
               <FileName>rtc.cgi</FileName>
               <FileType>9</FileType>
               <FilePath>.\Web\rtc.cgi</FilePath>
+            </File>
+            <File>
+              <FileName>rtc.cgx</FileName>
+              <FileType>9</FileType>
+              <FilePath>.\Web\rtc.cgx</FilePath>
             </File>
           </Files>
         </Group>

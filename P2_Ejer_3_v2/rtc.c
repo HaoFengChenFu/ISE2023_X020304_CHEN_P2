@@ -146,10 +146,10 @@ void Display_Date_Time(void)
 	RTC_DateTypeDef gDate;
 	HAL_RTC_GetTime(&hrtc, &gTime, RTC_FORMAT_BIN);//Primero el time y luego el date siempre
 	HAL_RTC_GetDate(&hrtc, &gDate, RTC_FORMAT_BIN);
-	sprintf(time, "Time: %.2d:%.2d:%.2d", gTime.Hours, gTime.Minutes, gTime.Seconds);
+	sprintf(time, "%.2d:%.2d:%.2d", gTime.Hours, gTime.Minutes, gTime.Seconds);
 	
 	HAL_RTC_GetDate(&hrtc, &gDate, RTC_FORMAT_BIN);
-	sprintf(date, "Date: %.2d-%.2d-%.4d", gDate.Date, gDate.Month, gDate.Year+2000);
+	sprintf(date, "%.2d-%.2d-%.4d", gDate.Date, gDate.Month, gDate.Year+2000);
 
 	LCD_symbolToLocalBuffer_L1(time, strlen(time));
 	LCD_symbolToLocalBuffer_L2(date, strlen(date));
