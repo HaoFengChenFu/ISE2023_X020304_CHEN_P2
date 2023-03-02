@@ -405,7 +405,19 @@ uint32_t netCGI_Script (const char *env, char *buf, uint32_t buflen, uint32_t *p
           break;
       }
       break;
-
+		
+		case 'h':
+			switch (env[2]) {
+				case '1':		// Tiempo
+					len = (uint32_t)sprintf (buf, &env[4], "aas");
+					break;
+				
+				case '2':		// Fecha
+				
+					break;
+			}
+			break;
+			
     case 'x':		// Es para recargar
       // AD Input from 'ad.cgx'
       adv = AD_in (10);

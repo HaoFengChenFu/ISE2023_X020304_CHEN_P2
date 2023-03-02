@@ -38,7 +38,7 @@ t  <th width=55%>Bargraph</th></tr>
 t <tr><td><img src="pabb.gif">POT1:</td>
 t   <td align="center">
 t <input type="text" readonly style="background-color: transparent; border: 0px"
-c g 1  size="10" id="ad_value" value="0x%03X"></td>
+c g 1  size="10" id="ad_value" value="%s"></td>
 t <td align="center"><input type="text" readonly style="background-color: transparent; border: 0px"
 c g 2  size="10" id="ad_volts" value="%5.3f V"></td>
 t <td height=50><table bgcolor="#FFFFFF" border="2" cellpadding="0" cellspacing="0" width="100%"><tr>
