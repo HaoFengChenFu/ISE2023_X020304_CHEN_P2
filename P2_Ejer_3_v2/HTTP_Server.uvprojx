@@ -439,11 +439,6 @@
               <FilePath>.\leds.h</FilePath>
             </File>
             <File>
-              <FileName>rtc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\rtc.c</FilePath>
-            </File>
-            <File>
               <FileName>rtc.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\rtc.h</FilePath>
@@ -457,6 +452,11 @@
               <FileName>Parpadeo.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Parpadeo.h</FilePath>
+            </File>
+            <File>
+              <FileName>rtc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\rtc.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -557,11 +557,6 @@
               <FileName>pabb.gif</FileName>
               <FileType>9</FileType>
               <FilePath>.\Web\pabb.gif</FilePath>
-            </File>
-            <File>
-              <FileName>rtc.cgi</FileName>
-              <FileType>9</FileType>
-              <FilePath>.\Web\rtc.cgi</FilePath>
             </File>
           </Files>
         </Group>
@@ -1025,11 +1020,6 @@
               <FilePath>.\leds.h</FilePath>
             </File>
             <File>
-              <FileName>rtc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\rtc.c</FilePath>
-            </File>
-            <File>
               <FileName>rtc.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\rtc.h</FilePath>
@@ -1043,6 +1033,11 @@
               <FileName>Parpadeo.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Parpadeo.h</FilePath>
+            </File>
+            <File>
+              <FileName>rtc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\rtc.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1143,11 +1138,6 @@
               <FileName>pabb.gif</FileName>
               <FileType>9</FileType>
               <FilePath>.\Web\pabb.gif</FilePath>
-            </File>
-            <File>
-              <FileName>rtc.cgi</FileName>
-              <FileType>9</FileType>
-              <FilePath>.\Web\rtc.cgi</FilePath>
             </File>
           </Files>
         </Group>
