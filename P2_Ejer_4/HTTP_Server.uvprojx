@@ -468,6 +468,16 @@
               <FileType>5</FileType>
               <FilePath>.\joystick.h</FilePath>
             </File>
+            <File>
+              <FileName>SNTP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SNTP.c</FilePath>
+            </File>
+            <File>
+              <FileName>SNTP.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\SNTP.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1068,6 +1078,16 @@
               <FileName>joystick.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\joystick.h</FilePath>
+            </File>
+            <File>
+              <FileName>SNTP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SNTP.c</FilePath>
+            </File>
+            <File>
+              <FileName>SNTP.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\SNTP.h</FilePath>
             </File>
           </Files>
         </Group>

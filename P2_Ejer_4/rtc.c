@@ -77,7 +77,7 @@ void Set_RTC_Time(uint8_t hour, uint8_t minute, uint8_t second)
 /***********************************************************
 						Obtención de la fecha en binario
 ***********************************************************/
-void Get_Date_RTC()
+void Get_Date_RTC(void)
 {
 	HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
 }

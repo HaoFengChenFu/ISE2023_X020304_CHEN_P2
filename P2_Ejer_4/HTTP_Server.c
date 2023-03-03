@@ -68,12 +68,6 @@ __NO_RETURN void app_main (void *arg);
 uint16_t AD_in (uint32_t ch) {
   int32_t val = 0;
 
-//  if (ch == 0) {
-//    ADC_StartConversion();
-//    while (ADC_ConversionDone () < 0);
-//    val = ADC_GetValue();
-//  }
-	
 	ADC_HandleTypeDef adchandle; //handler definition
 	ADC1_pins_F429ZI_config(); //specific PINS configuration
 

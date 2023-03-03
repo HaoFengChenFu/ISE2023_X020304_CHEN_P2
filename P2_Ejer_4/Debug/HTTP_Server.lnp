@@ -9,6 +9,7 @@
 ".\debug\parpadeo.o"
 ".\debug\rtc.o"
 ".\debug\joystick.o"
+".\debug\sntp.o"
 ".\debug\irq_armv7m.o"
 ".\debug\rtx_delay.o"
 ".\debug\rtx_evflags.o"
