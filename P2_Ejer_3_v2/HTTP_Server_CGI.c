@@ -16,11 +16,12 @@
 #include "leds.h"				// MODIFICADO
 #include "lcd.h"				// MODIFICADO
 #include "adc.h"				// MODIFICADO
+#include "rtc.h"				// MODIFICADO
 ADC_HandleTypeDef adchandle; //handler definition
 extern char time[30];
 extern char date[30];
 
-
+extern char Time_Date[60];
 
 
 //#include "Board_LED.h"                  // ::Board Support:LED
@@ -408,20 +409,14 @@ uint32_t netCGI_Script (const char *env, char *buf, uint32_t buflen, uint32_t *p
       break;
 		
 		case 'h':
-			switch (env[2]) {
-				case '1':		// Tiempo
-					len = (uint32_t)sprintf (buf, &env[4], time);
-					break;
-				
-				case '2':		// Fecha
-					len = (uint32_t)sprintf (buf, &env[4], date);
-					break;
-			}
+			Get_String_Date_Time();
+			len = (uint32_t)sprintf (buf, &env[4], Time_Date);
+
 			break;
 			
-    case 'i':		// Es para recargar
-      // AD Input from 'ad.cgx'
-      len = (uint32_t)sprintf (buf, &env[1], time);
+    case 'i':		// Es para recargar el tiempo y la fecha
+			Get_String_Date_Time();
+      len = (uint32_t)sprintf (buf, &env[1], Time_Date);
       break;
 		
     case 'x':		// Es para recargar
