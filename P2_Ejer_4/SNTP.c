@@ -1,4 +1,5 @@
 #include "SNTP.h"
+#include "cmsis_os2.h"  
 
 /**
 *			Información sobre el SNTP
@@ -15,23 +16,46 @@
 
 
 NET_ADDR SNTP_Address;
-uint8_t address_spain_server[4] = {51, 145, 123, 29};
+uint8_t address_spain_server[4] = {185, 209, 85, 222};
+uint32_t segundos;
 
-void Init_SNTP(void){
-	for(int i = 0; i < 4; i++){
-		SNTP_Address.addr[i] = address_spain_server[i];
-	}
-	SNTP_Address.addr_type = NET_ADDR_IP4;
-	SNTP_Address.port = 123;			// Esta es para UDP, para la de TCP es 119
+osThreadId_t tid_Thread_SNTP;                        // thread id
+ 
+
+void Thread_SNTP (void *argument);  
+
+int Init_SNTP(void){
+	
+  tid_Thread_SNTP = osThreadNew(Thread_SNTP, NULL, NULL);
+  if (tid_Thread_SNTP == NULL) {
+    return(-1);
+  }
+	
+//	for(int i = 0; i < 4; i++){
+//		SNTP_Address.addr[i] = address_spain_server[i];
+//	}
+//	SNTP_Address.addr_type = NET_ADDR_IP4;
+//	SNTP_Address.port = 123;			// Esta es para UDP, para la de TCP es 119
 	
 	
-	netSNTPc_SetMode(netSNTPc_ModeUnicast);
+	netSNTPc_SetMode(netSNTPc_ModeBroadcast);
 	// Haciendo nslookup time.windows.com sacamos las direcciones IP
 	// Otra información importante: https://www.pool.ntp.org/zone/es
-	netSNTPc_GetTime(&SNTP_Address, (netSNTPc_cb_t) &SNTP_Callback);
+	netSNTPc_GetTime(NULL, (netSNTPc_cb_t) &SNTP_Callback);				// Si addr es nulo se usa la direccion del Net_Config_SNTP_Client
 	
+	return(0);
 }
 
 void SNTP_Callback(uint32_t seconds, uint32_t seconds_fraction){
-	
+	segundos = seconds;
+	HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);
+}
+
+void Thread_SNTP (void *argument) {
+ 
+//	while (1) {
+//		netSNTPc_GetTime(&SNTP_Address, (netSNTPc_cb_t) &SNTP_Callback);
+//		osDelay(1000);									// 0,25 ms * 20 =  5 segundos
+//		osThreadYield();
+//	}
 }

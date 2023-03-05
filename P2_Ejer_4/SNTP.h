@@ -6,7 +6,9 @@
 	#include "rl_net.h"                     // Keil.MDK-Pro::Network:CORE
 	#include "Net_Config_SNTP_Client.h"
 	
-	void Init_SNTP(void);
+	#include "stm32f4xx_hal.h"
+	
+	int Init_SNTP(void);
 	void SNTP_Callback(uint32_t seconds, uint32_t seconds_fraction);
 	
 #endif

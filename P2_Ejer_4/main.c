@@ -45,6 +45,10 @@
 #include "rtc.h"
 #include "Parpadeo.h"
 #include "joystick.h"
+#include "SNTP.h"
+
+
+
 
 extern RTC_HandleTypeDef hrtc;
 extern RTC_AlarmTypeDef sAlarm;			// La s es de set, se usaría g si fuese get
@@ -143,6 +147,7 @@ int main(void)
 }
 
 void rtc_app (void *arg) {
+	Init_SNTP();
 	
 	LCD_reset();
 	LCD_Init();
