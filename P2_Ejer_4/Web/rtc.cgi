@@ -24,15 +24,10 @@ t <form action="rtc.cgi" method="post" name="rtc">
 t <input type="hidden" value="rtc" name="pg">
 t <table border=0 width=99%><font size="3">
 t <tr bgcolor=#aaccff>
-t  <th width=40%>Variable</th>
-t  <th width=60%>Valores</th></tr>
+t  <th width=100%>Tiempo y Fecha</th>
 # Here begin data setting which is formatted in HTTP_CGI.C module
-t <tr><td><img src=pabb.gif>Tiempo</td>
 t <td align="center"><input type="text" readonly style="background-color: transparent; border: 0px"
-c h 1 size="20" id="rtc_time_value" value="%s"></td></tr>
-t <tr><td><img src=pabb.gif>Fecha</TD>
-t <td align="center"><input type="text" readonly style="background-color: transparent; border: 0px"
-c h 2 size="20" id="rtc_date_value" value="%s"></td></tr>
+c h 1 size="60" id="rtc_time_value" value="%s"></td></tr>
 t </font></table>
 t <p align=center>
 t <input type=button value="Refresh" onclick="updateMultiple(rtcUpdate,updateValueRTC)">

@@ -1,61 +1,40 @@
+#include "stm32f4xx_hal.h"
+#include <stdio.h>
+#include <string.h>
+#include "cmsis_os2.h"                          // CMSIS RTOS header file
 #include "SNTP.h"
-#include "cmsis_os2.h"  
+#include "rl_net.h"
+#include <time.h>
 
-/**
-*			Información sobre el SNTP
-*
-*			Enlace: https://www.keil.com/pack/doc/mw6/Network/html/group__sntp__routines.html
-*				 			file:///C:/Users/fengc/AppData/Local/Arm/Packs/Keil/MDK-Middleware/7.13.0/Doc/Network/html/group__net_s_n_t_pc___func.html
-*
-*			Información sobre el NET_ADDR, para acceder ir a Network -> Service -> SNTP Server -> Pinchar enlace de la descripción
-*			
-*			Enlace: file:///C:/Users/fengc/AppData/Local/Arm/Packs/Keil/MDK-Middleware/7.13.0/Doc/Network/html/group__network__structs.html#struct_n_e_t___a_d_d_r
-*
-*			Puertos de red: https://es.wikipedia.org/wiki/Anexo:Puertos_de_red
-*/
-
-
-NET_ADDR SNTP_Address;
-uint8_t address_spain_server[4] = {185, 209, 85, 222};
-uint32_t segundos;
-
-osThreadId_t tid_Thread_SNTP;                        // thread id
+const  NET_ADDR4 ntp_server = { NET_ADDR_IP4 , 0, 217, 79, 179, 106 };
+static void time_callback (uint32_t seconds, uint32_t seconds_fraction);
  
-
-void Thread_SNTP (void *argument);  
-
-int Init_SNTP(void){
-	
-  tid_Thread_SNTP = osThreadNew(Thread_SNTP, NULL, NULL);
-  if (tid_Thread_SNTP == NULL) {
-    return(-1);
+void get_time (void) {
+  if (netSNTPc_GetTime (NULL, time_callback) == netOK) {
+    printf ("SNTP request sent.\n");
   }
-	
-//	for(int i = 0; i < 4; i++){
-//		SNTP_Address.addr[i] = address_spain_server[i];
-//	}
-//	SNTP_Address.addr_type = NET_ADDR_IP4;
-//	SNTP_Address.port = 123;			// Esta es para UDP, para la de TCP es 119
-	
-	
-	netSNTPc_SetMode(netSNTPc_ModeBroadcast);
-	// Haciendo nslookup time.windows.com sacamos las direcciones IP
-	// Otra información importante: https://www.pool.ntp.org/zone/es
-	netSNTPc_GetTime(NULL, (netSNTPc_cb_t) &SNTP_Callback);				// Si addr es nulo se usa la direccion del Net_Config_SNTP_Client
-	
-	return(0);
+  else {
+    printf ("SNTP not ready or bad parameters.\n");
+  }
 }
-
-void SNTP_Callback(uint32_t seconds, uint32_t seconds_fraction){
-	segundos = seconds;
-	HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);
-}
-
-void Thread_SNTP (void *argument) {
  
-//	while (1) {
-//		netSNTPc_GetTime(&SNTP_Address, (netSNTPc_cb_t) &SNTP_Callback);
-//		osDelay(1000);									// 0,25 ms * 20 =  5 segundos
-//		osThreadYield();
-//	}
+static void time_callback (uint32_t seconds, uint32_t seconds_fraction) {
+  if (seconds == 0) {
+    printf ("Server not responding or bad response.\n");
+  }
+  else {
+    printf ("%d seconds elapsed since 1.1.1970\n", seconds);
+    getLocalTime(seconds);
+  }
+}
+
+void getLocalTime(uint32_t seconds)
+{
+  time_t rawtime = seconds;
+  struct tm ts;
+  char buf[80];
+  
+  ts = *localtime(&rawtime);
+  strftime(buf, sizeof(buf), "%a %Y-%m-%d %H:%M:%S %Z", &ts);
+  printf("%s\n", buf);
 }

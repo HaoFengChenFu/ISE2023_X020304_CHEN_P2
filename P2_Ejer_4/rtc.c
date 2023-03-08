@@ -12,6 +12,7 @@ RTC_DateTypeDef sDate;
 
 char time[30];
 char date[30];
+char Time_Date[60];
 /***********************************************************
 							Inicialización del RTC
 ***********************************************************/
@@ -49,8 +50,6 @@ void RTC_Init(void)
 	
 	HAL_NVIC_EnableIRQ(RTC_Alarm_IRQn);		// Habilitamos las interrupciones de las alarma del RTC
 	HAL_RTC_Init(&hrtc);
-	
-	Set_Alarm(sTime.Hours,sTime.Minutes+1,0);
 }
 
 /***********************************************************
@@ -64,7 +63,7 @@ void Get_Time_RTC_Binary(void)
 /***********************************************************
 						Ajusta un nuevo tiempo
 ***********************************************************/
-void Set_RTC_Time(uint8_t hour, uint8_t minute, uint8_t second)
+void Set_Time_RTC(uint8_t hour, uint8_t minute, uint8_t second)
 {
 	sTime.Hours = hour;
 	sTime.Minutes = minute;
@@ -77,7 +76,7 @@ void Set_RTC_Time(uint8_t hour, uint8_t minute, uint8_t second)
 /***********************************************************
 						Obtención de la fecha en binario
 ***********************************************************/
-void Get_Date_RTC(void)
+void Get_Date_RTC()
 {
 	HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
 }
@@ -139,6 +138,18 @@ void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc)
 	}
 }
 
+/***************************************************************************************
+			Genera el string la fecha y el tiempo que se envia al servidor al servidor
+***************************************************************************************/
+void Get_String_Date_Time(void)
+{
+	RTC_TimeTypeDef gTime;
+	RTC_DateTypeDef gDate;
+	HAL_RTC_GetTime(&hrtc, &gTime, RTC_FORMAT_BIN);//Primero el time y luego el date siempre
+	HAL_RTC_GetDate(&hrtc, &gDate, RTC_FORMAT_BIN);
+	sprintf(Time_Date, "Hora : %.2d:%.2d:%.2d  Fecha: %.2d-%.2d-%.4d ", gTime.Hours, gTime.Minutes, gTime.Seconds, gDate.Date, gDate.Month, gDate.Year+2000);
+}
+
 /***********************************************************
 			Muestra la fecha y el tiempo en el display
 ***********************************************************/
@@ -148,10 +159,10 @@ void Display_Date_Time(void)
 	RTC_DateTypeDef gDate;
 	HAL_RTC_GetTime(&hrtc, &gTime, RTC_FORMAT_BIN);//Primero el time y luego el date siempre
 	HAL_RTC_GetDate(&hrtc, &gDate, RTC_FORMAT_BIN);
-	sprintf(time, "%.2d:%.2d:%.2d", gTime.Hours, gTime.Minutes, gTime.Seconds);
+	sprintf(time, "Time: %.2d:%.2d:%.2d", gTime.Hours, gTime.Minutes, gTime.Seconds);
 	
 	HAL_RTC_GetDate(&hrtc, &gDate, RTC_FORMAT_BIN);
-	sprintf(date, "%.2d-%.2d-%.4d", gDate.Date, gDate.Month, gDate.Year+2000);
+	sprintf(date, "Date: %.2d-%.2d-%.4d", gDate.Date, gDate.Month, gDate.Year+2000);
 
 	LCD_symbolToLocalBuffer_L1(time, strlen(time));
 	LCD_symbolToLocalBuffer_L2(date, strlen(date));
