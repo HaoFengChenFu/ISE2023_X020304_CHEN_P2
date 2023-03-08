@@ -4,6 +4,8 @@
 #include "cmsis_os2.h"                          // CMSIS RTOS header file
 #include "SNTP.h"
 #include "rl_net.h"
+#include "lcd.h"
+#include <time.h>
 
 const  NET_ADDR4 ntp_server = { NET_ADDR_IP4 , 0, 217, 79, 179, 106 };
 static void time_callback (uint32_t seconds, uint32_t seconds_fraction);
@@ -23,5 +25,23 @@ static void time_callback (uint32_t seconds, uint32_t seconds_fraction) {
   }
   else {
     printf ("%d seconds elapsed since 1.1.1970\n", seconds);
+    getLocalTime(seconds);
   }
+}
+
+void getLocalTime(uint32_t seconds)
+{
+  time_t rawtime = seconds;
+  struct tm ts;
+  char buf[80];
+  
+  ts = *localtime(&rawtime);
+  strftime(buf, sizeof(buf), "%a %Y-%m-%d %H:%M:%S %Z", &ts);
+	
+	strftime(buf, sizeof(buf), "Date %Y-%m-%d", &ts);
+	LCD_symbolToLocalBuffer_L1(buf, strlen(buf));
+	
+	strftime(buf, sizeof(buf), "Time %H:%M:%S %Z", &ts);
+	LCD_symbolToLocalBuffer_L2(buf, strlen(buf));
+  printf("%s\n", buf);
 }

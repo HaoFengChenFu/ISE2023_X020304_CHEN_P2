@@ -6,5 +6,5 @@
 
 //FUNCIONES
 void get_time (void);
-
+void getLocalTime(uint32_t seconds);
 #endif

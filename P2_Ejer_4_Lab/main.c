@@ -158,12 +158,14 @@ void rtc_app (void *arg) {
 	
 	Init_Joystick();
   
-  osDelay(7000);
+  osDelay(5000);
   get_time();
   
   while(1) {
-		Display_Date_Time();
-		osDelay(1000);	
+		osDelay(5000);
+		get_time();
+//		Display_Date_Time();
+//		osDelay(1000);	
   }
 }
 
