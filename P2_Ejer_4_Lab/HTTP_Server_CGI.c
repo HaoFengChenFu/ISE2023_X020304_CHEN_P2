@@ -17,9 +17,12 @@
 #include "lcd.h"				// MODIFICADO
 #include "adc.h"				// MODIFICADO
 #include "rtc.h"				// MODIFICADO
+#include "SNTP.h"
+
+
 ADC_HandleTypeDef adchandle; //handler definition
-extern char time[30];
-extern char date[30];
+extern char timeString[30];
+extern char dateString[30];
 
 extern char Time_Date[60];
 

@@ -1,5 +1,6 @@
 .\debug\sntp.o: SNTP.c
 .\debug\sntp.o: .\RTE\_Debug\Pre_Include_Global.h
+.\debug\sntp.o: SNTP.h
 .\debug\sntp.o: C:\Users\fengc\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.17.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h
 .\debug\sntp.o: .\RTE\Device\STM32F429ZITx\stm32f4xx_hal_conf.h
 .\debug\sntp.o: .\RTE\_Debug\RTE_Components.h
@@ -38,12 +39,15 @@
 .\debug\sntp.o: C:\Users\fengc\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.17.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h
 .\debug\sntp.o: C:\Users\fengc\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.17.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h
 .\debug\sntp.o: C:\Users\fengc\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.17.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h
+.\debug\sntp.o: C:\Users\fengc\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\RTOS2\Include\cmsis_os2.h
 .\debug\sntp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\debug\sntp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-.\debug\sntp.o: C:\Users\fengc\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\RTOS2\Include\cmsis_os2.h
-.\debug\sntp.o: SNTP.h
 .\debug\sntp.o: C:\Users\fengc\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.13.0\Network\Include\rl_net.h
 .\debug\sntp.o: C:\Users\fengc\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.13.0\Network\Include\rl_net_ds.h
 .\debug\sntp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\debug\sntp.o: lcd.h
 .\debug\sntp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\time.h
+.\debug\sntp.o: rtc.h
+.\debug\sntp.o: Parpadeo.h
+.\debug\sntp.o: lcd.h
+.\debug\sntp.o: SNTP.h

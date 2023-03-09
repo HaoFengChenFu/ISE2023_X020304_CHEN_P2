@@ -1,6 +1,5 @@
 #include "rtc.h"
-#include "lcd.h"
-#include "cmsis_os2.h"
+
 /*********************************************************************
 		Inspiración: https://controllerstech.com/internal-rtc-in-stm32/
 *********************************************************************/
@@ -10,9 +9,10 @@ RTC_AlarmTypeDef sAlarm;
 RTC_TimeTypeDef sTime;
 RTC_DateTypeDef sDate;
 
-char time[30];
-char date[30];
+char timeString[30];
+char dateString[30];
 char Time_Date[60];
+
 /***********************************************************
 							Inicialización del RTC
 ***********************************************************/
@@ -31,22 +31,29 @@ void RTC_Init(void)
 	hrtc.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
 	hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
 	
-	// Ajustamos el tiempo
-	sTime.Hours = 12;
-	sTime.TimeFormat=RTC_HOURFORMAT_24;
-	sTime.Minutes = 24;
-	sTime.Seconds = 56;
-	sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
-	sTime.StoreOperation = RTC_STOREOPERATION_RESET;
-	HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
 	
-	// Ajustamos la fecha
-	sDate.Year = 23;
-	sDate.Month = RTC_MONTH_FEBRUARY;
-	sDate.WeekDay = RTC_WEEKDAY_MONDAY;
-	sDate.Date = 21;
 	
-	HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
+	// Estas lineas no importan si se usa el SNTP
+//	// Ajustamos el tiempo					****************************************  POR MODIFICAR POR EL SNTP
+//	sTime.Hours = 12;
+//	sTime.TimeFormat=RTC_HOURFORMAT_24;
+//	sTime.Minutes = 24;
+//	sTime.Seconds = 56;
+//	sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
+//	sTime.StoreOperation = RTC_STOREOPERATION_RESET;
+//	HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
+//	
+//	// Ajustamos la fecha
+//	sDate.Year = 23;
+//	sDate.Month = RTC_MONTH_FEBRUARY;
+//	sDate.WeekDay = RTC_WEEKDAY_MONDAY;
+//	sDate.Date = 21;
+//	
+//	HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
+	
+	
+	
+	
 	
 	HAL_NVIC_EnableIRQ(RTC_Alarm_IRQn);		// Habilitamos las interrupciones de las alarma del RTC
 	HAL_RTC_Init(&hrtc);
@@ -159,12 +166,12 @@ void Display_Date_Time(void)
 	RTC_DateTypeDef gDate;
 	HAL_RTC_GetTime(&hrtc, &gTime, RTC_FORMAT_BIN);//Primero el time y luego el date siempre
 	HAL_RTC_GetDate(&hrtc, &gDate, RTC_FORMAT_BIN);
-	sprintf(time, "Time: %.2d:%.2d:%.2d", gTime.Hours, gTime.Minutes, gTime.Seconds);
+	sprintf(timeString, "Time: %.2d:%.2d:%.2d", gTime.Hours, gTime.Minutes, gTime.Seconds);
 	
 	HAL_RTC_GetDate(&hrtc, &gDate, RTC_FORMAT_BIN);
-	sprintf(date, "Date: %.2d-%.2d-%.4d", gDate.Date, gDate.Month, gDate.Year+2000);
+	sprintf(dateString, "Date: %.2d-%.2d-%.4d", gDate.Date, gDate.Month, gDate.Year+2000);
 
-	LCD_symbolToLocalBuffer_L1(time, strlen(time));
-	LCD_symbolToLocalBuffer_L2(date, strlen(date));
+	LCD_symbolToLocalBuffer_L1(timeString, strlen(timeString));
+	LCD_symbolToLocalBuffer_L2(dateString, strlen(dateString));
 	LCD_update();
 }

@@ -46,3 +46,11 @@
 .\debug\joystick.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\debug\joystick.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\debug\joystick.o: Parpadeo.h
+.\debug\joystick.o: lcd.h
+.\debug\joystick.o: SNTP.h
+.\debug\joystick.o: C:\Users\fengc\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.13.0\Network\Include\rl_net.h
+.\debug\joystick.o: C:\Users\fengc\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.13.0\Network\Include\rl_net_ds.h
+.\debug\joystick.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\debug\joystick.o: lcd.h
+.\debug\joystick.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\time.h
+.\debug\joystick.o: rtc.h

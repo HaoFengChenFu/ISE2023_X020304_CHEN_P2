@@ -55,8 +55,8 @@ extern RTC_AlarmTypeDef sAlarm;			// La s es de set, se usaría g si fuese get
 extern RTC_TimeTypeDef sTime;
 extern RTC_DateTypeDef sDate;
 
-extern char time[30];
-extern char date[30];
+extern char timeString[30];
+extern char dateString[30];
 
 void rtc_app(void *arg); 
 
@@ -133,9 +133,13 @@ int main(void)
   /* Create application main thread */
   osThreadNew(app_main, NULL, &app_main_attr);
 	
+	
+	
 	osThreadNew(rtc_app, NULL, NULL);
 	Init_Parpadeo();
-		
+	Init_ThSNTP();
+	
+	
   /* Start thread execution */
   osKernelStart();
 #endif
@@ -159,13 +163,11 @@ void rtc_app (void *arg) {
 	Init_Joystick();
   
   osDelay(5000);
-  get_time();
+  get_SNTP_Time();
   
   while(1) {
-		osDelay(5000);
-		get_time();
-//		Display_Date_Time();
-//		osDelay(1000);	
+		Display_Date_Time();
+		osDelay(1000);	
   }
 }
 

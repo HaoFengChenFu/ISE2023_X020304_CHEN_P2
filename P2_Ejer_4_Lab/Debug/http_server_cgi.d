@@ -49,3 +49,8 @@
 .\debug\http_server_cgi.o: adc.h
 .\debug\http_server_cgi.o: rtc.h
 .\debug\http_server_cgi.o: Parpadeo.h
+.\debug\http_server_cgi.o: lcd.h
+.\debug\http_server_cgi.o: SNTP.h
+.\debug\http_server_cgi.o: lcd.h
+.\debug\http_server_cgi.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\time.h
+.\debug\http_server_cgi.o: rtc.h

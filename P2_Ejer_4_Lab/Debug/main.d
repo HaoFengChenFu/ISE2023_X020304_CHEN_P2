@@ -46,7 +46,13 @@
 .\debug\main.o: lcd.h
 .\debug\main.o: rtc.h
 .\debug\main.o: Parpadeo.h
-.\debug\main.o: joystick.h
-.\debug\main.o: joystick.h
-.\debug\main.o: rtc.h
+.\debug\main.o: lcd.h
 .\debug\main.o: SNTP.h
+.\debug\main.o: C:\Users\fengc\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.13.0\Network\Include\rl_net.h
+.\debug\main.o: C:\Users\fengc\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.13.0\Network\Include\rl_net_ds.h
+.\debug\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\debug\main.o: lcd.h
+.\debug\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\time.h
+.\debug\main.o: rtc.h
+.\debug\main.o: joystick.h
+.\debug\main.o: joystick.h

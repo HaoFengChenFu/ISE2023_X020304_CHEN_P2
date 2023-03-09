@@ -44,3 +44,10 @@
 .\debug\rtc.o: Parpadeo.h
 .\debug\rtc.o: lcd.h
 .\debug\rtc.o: C:\Users\fengc\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\RTOS2\Include\cmsis_os2.h
+.\debug\rtc.o: SNTP.h
+.\debug\rtc.o: C:\Users\fengc\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.13.0\Network\Include\rl_net.h
+.\debug\rtc.o: C:\Users\fengc\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.13.0\Network\Include\rl_net_ds.h
+.\debug\rtc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\debug\rtc.o: lcd.h
+.\debug\rtc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\time.h
+.\debug\rtc.o: rtc.h
