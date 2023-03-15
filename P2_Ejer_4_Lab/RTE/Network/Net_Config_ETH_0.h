@@ -21,7 +21,7 @@
 //   <i>Value FF-FF-FF-FF-FF-FF is not allowed,
 //   <i>LSB of first byte must be 0 (an ethernet Multicast bit).
 //   <i>Default: "1E-30-6C-A2-45-5E"
-#define ETH0_MAC_ADDR           "1E-30-6C-A2-45-70"
+#define ETH0_MAC_ADDR           "1E-30-6C-A2-45-5E"
 
 //   <e>VLAN
 //   <i>Enable or disable Virtual LAN
@@ -142,7 +142,7 @@
 //       <i>This value is optional. If enabled, a list of NTP Servers
 //       <i>(option 42) is also requested from DHCP server.
 //       <i>Default: disabled
-#define ETH0_DHCP_NTP_SERVERS   1
+#define ETH0_DHCP_NTP_SERVERS   0
 //     </e>
 
 //     Disable ICMP Echo response

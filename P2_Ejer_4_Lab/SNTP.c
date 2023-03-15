@@ -66,7 +66,7 @@ void getLocalTime(uint32_t seconds)
 	
 	// Añadido    A lo mejor hay que pasarlo a (uint8_t)		**************************************************************
 	Set_RTC_Time(ts.tm_hour+1, ts.tm_min, ts.tm_sec);				// Hora + 1 porque el que devuelve está retrasado 1 hora
-	Set_RTC_Date(ts.tm_year-100, ts.tm_mon, ts.tm_wday, ts.tm_yday-18);
+	Set_RTC_Date(ts.tm_year-100, ts.tm_mon+1, ts.tm_wday, ts.tm_yday-18);
 	
 	
 	
