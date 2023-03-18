@@ -30,8 +30,8 @@ t <br><br><label for="minutoAlarma">Elige los Minutos (Entre 0 y 59):</label>
 t <input type="number" id="minutoAlarma" name="minutoAlarma" min="0" max="59">
 t <br><br><label for="segundoAlarma">Elige los Segundos (Entre 0 y 59):</label>
 t <input type="number" id="segundoAlarma" name="segundoAlarma" min="0" max="59">
-t <br><br><label for="quantity">Elige el periodo de la Alarma (Entre 100 ms y 1000 ms):</label>
-t <input type="number" id="quantity" name="quantity" step ="100" min="100" max="1000">
+t <br><br><label for="periodoAlarma">Elige el periodo de la Alarma (Entre 100 ms y 1000 ms):</label>
+t <input type="number" id="periodoAlarma" name="periodoAlarma" step ="100" min="100" max="1000">
 t </form>
 t <p align=center>
 t <input type=submit name=set value="Send" id="valor">

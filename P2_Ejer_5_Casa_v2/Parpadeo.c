@@ -7,7 +7,9 @@
  *---------------------------------------------------------------------------*/
  
 osThreadId_t tid_Thread_Parpadeo;                        // thread id
- 
+
+uint16_t valorPeriodoAlarma;
+
 void Parpadeo (void *argument);                   // thread function
  
 int Init_Parpadeo (void) {
@@ -24,12 +26,21 @@ void Parpadeo (void *argument) {
  
   while (1) {
 		osThreadFlagsWait(1, osFlagsWaitAny, osWaitForever);	
-		// Parpadea durante 5 segundos
-		for(int i = 0; i < 20; i++){		// Parpadea 20 veces
+		
+		for(int i = 0; i < (5*1000)/(valorPeriodoAlarma); i++){		// Parpadea durante 5 segundos ---> 5 segundos / Periodo de la Alarma, con esto obtienes cuantas veces debe parpadear hasta llegar a los 5 segundos
 			//printf("Funciona\n");
 			HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);
-			osDelay(250);									// 0,25 ms * 20 =  5 segundos
+			osDelay(valorPeriodoAlarma);
 		}
+		
+		
+		
+//		// Parpadea durante 5 segundos
+//		for(int i = 0; i < 20; i++){		// Parpadea 20 veces
+//			//printf("Funciona\n");
+//			HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);
+//			osDelay(250);									// 0,25 ms * 20 =  5 segundos
+//		}
 		osThreadYield();
   }
 }

@@ -153,24 +153,7 @@
           <Name>(105=-1,-1,-1,-1,0)</Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
-      <Breakpoint>
-        <Bp>
-          <Number>0</Number>
-          <Type>0</Type>
-          <LineNumber>204</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134220832</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\HTTP_Server_CGI.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\HTTP_Server\HTTP_Server_CGI.c\204</Expression>
-        </Bp>
-      </Breakpoint>
+      <Breakpoint/>
       <WatchWindow1>
         <Ww>
           <count>0</count>
@@ -181,6 +164,11 @@
           <count>1</count>
           <WinNumber>1</WinNumber>
           <ItemText>hora,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>2</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>AlarmaHabilitado</ItemText>
         </Ww>
       </WatchWindow1>
       <ScvdPack>

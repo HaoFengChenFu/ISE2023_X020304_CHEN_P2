@@ -9,6 +9,7 @@ RTC_AlarmTypeDef sAlarm;
 RTC_TimeTypeDef sTime;
 RTC_DateTypeDef sDate;
 
+bool AlarmaHabilitado;
 char timeString[30];
 char dateString[30];
 char Time_Date[60];
@@ -104,23 +105,23 @@ void Set_RTC_Date(uint8_t year, uint8_t month, uint8_t week, uint8_t date)
 ***********************************************************/
 void Set_Alarm(uint8_t hour, uint8_t minute, uint8_t second)
 {
-
-	sAlarm.AlarmTime.Hours = hour;
-	sAlarm.AlarmTime.Minutes = minute;
-	sAlarm.AlarmTime.Seconds = second;
-	
-	sAlarm.AlarmDateWeekDaySel = RTC_ALARMDATEWEEKDAYSEL_DATE;
-	sAlarm.AlarmDateWeekDay = 21;
-	
-	sAlarm.AlarmMask = RTC_ALARMMASK_MINUTES;
-	sAlarm.AlarmTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE; 
-	sAlarm.AlarmTime.StoreOperation = RTC_STOREOPERATION_RESET;
-	sAlarm.Alarm = RTC_ALARM_A;
-	
-	HAL_RTC_AlarmIRQHandler(&hrtc);
-	HAL_NVIC_SetPriority(RTC_Alarm_IRQn, 0, 0);
-	HAL_RTC_SetAlarm_IT(&hrtc, &sAlarm, RTC_FORMAT_BIN);
-
+	if (AlarmaHabilitado){
+		sAlarm.AlarmTime.Hours = hour;
+		sAlarm.AlarmTime.Minutes = minute;
+		sAlarm.AlarmTime.Seconds = second;
+		
+		sAlarm.AlarmDateWeekDaySel = RTC_ALARMDATEWEEKDAYSEL_DATE;
+		sAlarm.AlarmDateWeekDay = 1;											// Esta linea del codigo es modificable, puedes elegir el dia
+		
+		sAlarm.AlarmMask = RTC_ALARMMASK_NONE;
+		sAlarm.AlarmTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE; 
+		sAlarm.AlarmTime.StoreOperation = RTC_STOREOPERATION_RESET;
+		sAlarm.Alarm = RTC_ALARM_A;
+		
+		HAL_RTC_AlarmIRQHandler(&hrtc);
+		HAL_NVIC_SetPriority(RTC_Alarm_IRQn, 0, 0);
+		HAL_RTC_SetAlarm_IT(&hrtc, &sAlarm, RTC_FORMAT_BIN);
+	}	
 }
 
 /***********************************************************

@@ -21,11 +21,13 @@
 
 uint8_t horaAlarmaRecibido, minutoAlarmaRecibido, segundoAlarmaRecibido;
 ADC_HandleTypeDef adchandle; //handler definition
-extern char timeString[30];
-extern char dateString[30];
+extern char timeString[30];							// rtc.c
+extern char dateString[30];							// rtc.c
 
-extern char Time_Date[60];
-extern uint8_t sel_SNTP_Server;
+extern char Time_Date[60];							// rtc.c
+extern uint8_t sel_SNTP_Server;					// SNTP.c
+extern bool AlarmaHabilitado;						// rtc.c
+extern uint16_t valorPeriodoAlarma;			// Parpadeo.c
 
 //#include "Board_LED.h"                  // ::Board Support:LED
 
@@ -202,10 +204,12 @@ void netCGI_ProcessData (uint8_t code, const char *data, uint32_t len) {
       
       // Añadido para la Alarma *********************************************************************************************************************************************
 			else if (strcmp (var, "AlarmaHab=1") == 0){
+				AlarmaHabilitado = true;
 				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_SET);
 				// Falta habilitar o deshabilitar la alarma en estos 2 else if
 			}
 			else if (strcmp (var, "AlarmaHab=0") == 0){
+				AlarmaHabilitado = false;
 				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_RESET);
 				
 			}
@@ -225,13 +229,17 @@ void netCGI_ProcessData (uint8_t code, const char *data, uint32_t len) {
 				minutoAlarmaRecibido = atoi(&var[13]);
 				printf("Minuto Alarma: %d\n", minutoAlarmaRecibido);
 				
-        //printf("Minutos Alarma: %d %d\n", var[14], var[15]);
       }
       else if (strncmp (var, "segundoAlarma=", strlen("segundoAlarma=")) == 0) {
 				segundoAlarmaRecibido = atoi(&var[14]);
 				printf("Segundo Alarma: %d\n", segundoAlarmaRecibido);
-        //printf("Segundos Alarma: %d %d\n", var[15], var[16]);
+				
+				Set_Alarm(horaAlarmaRecibido, minutoAlarmaRecibido, segundoAlarmaRecibido);
       }
+			else if (strncmp (var, "periodoAlarma=", strlen("periodoAlarma=")) == 0) {
+				valorPeriodoAlarma = atoi(&var[14]);
+				
+			}
       //*******************************************************************************************************************************************************			
 			
 			
